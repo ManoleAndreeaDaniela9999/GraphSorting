@@ -1,4 +1,4 @@
-package com.sort_app;
+package com.sort_app.tools;
 
 import com.sort_app.graphComponents.Arc;
 import com.sort_app.graphComponents.Node;

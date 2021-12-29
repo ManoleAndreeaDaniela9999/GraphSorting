@@ -1,7 +1,7 @@
 package com.sort_app.frameComponents;
 
-import com.sort_app.GraphicsDrawMethods;
-import com.sort_app.MatrixUtils;
+import com.sort_app.tools.GraphicsDrawMethods;
+import com.sort_app.tools.MatrixUtils;
 import com.sort_app.graphComponents.Arc;
 import com.sort_app.graphComponents.Node;
 
