@@ -1,5 +1,7 @@
 package com.sort_app.frameComponents;
 
+import com.sort_app.GraphicsDrawMethods;
+import com.sort_app.MatrixUtils;
 import com.sort_app.graphComponents.Arc;
 import com.sort_app.graphComponents.Node;
 
@@ -22,16 +24,17 @@ public class OrientedGrafCanvas extends GrafCanvas {
         super.paintComponent(g);
         for (Arc arc :
                 arcList) {
-            //GraphicsDrawMethods.DrawOrientedArc(arc, g);
+            GraphicsDrawMethods.DrawOrientedArc(arc, g);
         }
         for (Node node :
                 nodeList) {
-           // GraphicsDrawMethods.DrawNode(node, g);
+           GraphicsDrawMethods.DrawNode(node, g);
         }
     }
 
     public void addNode(Node node) {
         nodeList.addElement(node);
+        MatrixUtils.ConstructMatrix(getNodeList(),getArcList(), true);
     }
 
     public Vector<Node> getNodeList() {
@@ -48,7 +51,9 @@ public class OrientedGrafCanvas extends GrafCanvas {
             return;
         }
     }
-        arcList.addElement(arc); }
+        arcList.addElement(arc);
+        MatrixUtils.ConstructMatrix(getNodeList(),getArcList(), true);
+    }
 
     @Override
     public Vector<Arc> getArcList() {return arcList; }

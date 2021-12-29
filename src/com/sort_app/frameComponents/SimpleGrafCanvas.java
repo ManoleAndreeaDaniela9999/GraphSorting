@@ -1,5 +1,7 @@
 package com.sort_app.frameComponents;
 
+import com.sort_app.GraphicsDrawMethods;
+import com.sort_app.MatrixUtils;
 import com.sort_app.graphComponents.Arc;
 import com.sort_app.graphComponents.Node;
 
@@ -22,16 +24,17 @@ public class SimpleGrafCanvas extends GrafCanvas {
         super.paintComponent(g);
         for (Arc arc :
                 arcList) {
-            //GraphicsDrawMethods.DrawSimpleArc(arc, g);
+            GraphicsDrawMethods.DrawSimpleArc(arc, g);
         }
         for (Node node :
                 nodeList) {
-            //GraphicsDrawMethods.DrawNode(node, g);
+            GraphicsDrawMethods.DrawNode(node, g);
         }
     }
     @Override
     public void addNode(Node node) {
         nodeList.addElement(node);
+        MatrixUtils.ConstructMatrix(getNodeList(),getArcList(), false);
     }
 
     @Override
@@ -52,6 +55,7 @@ public class SimpleGrafCanvas extends GrafCanvas {
             }
         }
         arcList.addElement(arc);
+        MatrixUtils.ConstructMatrix(getNodeList(),getArcList(), false);
     }
 
     @Override

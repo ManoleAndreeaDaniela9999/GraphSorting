@@ -1,19 +1,21 @@
 package com.sort_app;
 
 import com.sort_app.factories.GrafCanvasFactory;
+import com.sort_app.factories.MouseAdapterFactory;
 import com.sort_app.frameComponents.GrafCanvas;
 import com.sort_app.graphComponents.Node;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
-public class Graf extends JFrame {
+public class Graf extends JFrame implements ActionListener {
 
     public static GrafCanvas canvas;
-    boolean m_isSimple;
-    String m_title;
+    private boolean m_isSimple;
+    private String m_title;
+    private MouseAdapter m_mAdapter;
+    private JMenuBar m_menuBar;
 
     public Graf(boolean isSimple) {
 
@@ -25,16 +27,17 @@ public class Graf extends JFrame {
         ImageIcon menuIcon = new ImageIcon("3rdParty\\Logo.png");
         this.setIconImage(menuIcon.getImage());
         this.getContentPane().setBackground(new Color(200, 191, 231));
-        this.setVisible(true);
         if (isSimple) {
             m_title = "Graf neorientat";
             this.setTitle("Graf neorientat");
         } else {
-            m_title = "Graf neorientat";
+            m_title = "Graf orientat";
             this.setTitle("Graf orientat");
         }
         canvas = GrafCanvasFactory.initGrafCanvas(isSimple);
-        //canvas.addMouseListener(); //TODO: MOUSE LISTENER FACTORY
+        m_mAdapter = MouseAdapterFactory.initCanvasMouseAdapter(isSimple);
+        canvas.addMouseListener(m_mAdapter);
+        canvas.addMouseMotionListener(m_mAdapter);
         this.add(canvas, BorderLayout.CENTER);
         this.addWindowListener(new WindowListener() {
             @Override
@@ -75,5 +78,20 @@ public class Graf extends JFrame {
 
             }
         });
+        m_menuBar = new JMenuBar();
+
+        JMenu connectedComponentsMenu = new JMenu("Preview connected components");
+        JMenu topologicalSorting = new JMenu("Preview topological Sorting");
+
+        m_menuBar.add(connectedComponentsMenu);
+        m_menuBar.add(topologicalSorting);
+        
+        this.setJMenuBar(m_menuBar);
+        this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }
