@@ -81,7 +81,7 @@ public class MainMenu extends JFrame implements ActionListener {
         buttonsPanel.setOpaque(false);
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
         this.add(titlePanel, BorderLayout.NORTH);
-        this.add(buttonsPanel,BorderLayout.CENTER);
+        this.add(buttonsPanel, BorderLayout.CENTER);
     }
 
     @Override
@@ -90,10 +90,10 @@ public class MainMenu extends JFrame implements ActionListener {
         if (subWinRefCount > 0) System.out.println("A window is already opened");
         else {
             if (e.getSource() == orientedGraf) {
-               GrafFactory.initGraf(false);
+                GrafFactory.initGraf(false);
                 System.out.println("You created oriented graph. \n ");
                 subWinRefCount = 1;
-               // m_grafNeorientat = null;
+                // m_grafNeorientat = null;
             }
             if (e.getSource() == simpleGraf) {
                 GrafFactory.initGraf(true);
@@ -101,5 +101,9 @@ public class MainMenu extends JFrame implements ActionListener {
                 subWinRefCount = 1;
             }
         }
+    }
+
+    public static void resetSubWinRefCount() {
+        subWinRefCount = 0;
     }
 }

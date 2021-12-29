@@ -5,12 +5,13 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class Graf extends JFrame{
+public class Graf extends JFrame {
 
     private GrafCanvas canvas;
     boolean m_isSimple;
+    String m_title;
 
-    public Graf(boolean isSimple){
+    public Graf(boolean isSimple) {
 
         m_isSimple = isSimple;
         System.out.println("WindOpened");
@@ -22,9 +23,11 @@ public class Graf extends JFrame{
         this.getContentPane().setBackground(new Color(200, 191, 231));
         this.setVisible(true);
         if (isSimple) {
+            m_title = "Graf neorientat";
             this.setTitle("Graf neorientat");
             //canvas = new GrafNeorientatCanvas();
         } else {
+            m_title = "Graf neorientat";
             this.setTitle("Graf orientat");
             //canvas = new GrafOrientatCanvas();
         }
@@ -33,6 +36,7 @@ public class Graf extends JFrame{
             @Override
             public void windowOpened(WindowEvent e) {
 
+                System.out.println("You opened \"" + m_title + "\" window");
             }
 
             @Override
@@ -42,7 +46,9 @@ public class Graf extends JFrame{
 
             @Override
             public void windowClosed(WindowEvent e) {
-
+                System.out.println("window closed");
+                MainMenu.resetSubWinRefCount();
+                Node.orderNumber = 0;
             }
 
             @Override
