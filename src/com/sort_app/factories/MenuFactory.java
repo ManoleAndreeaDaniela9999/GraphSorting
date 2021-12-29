@@ -1,4 +1,6 @@
-package com.sort_app;
+package com.sort_app.factories;
+
+import com.sort_app.MainMenu;
 
 public class MenuFactory {
     public static MainMenu initGrafMainMenu() {

@@ -1,5 +1,9 @@
 package com.sort_app;
 
+import com.sort_app.factories.GrafCanvasFactory;
+import com.sort_app.frameComponents.GrafCanvas;
+import com.sort_app.graphComponents.Node;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -7,7 +11,7 @@ import java.awt.event.WindowListener;
 
 public class Graf extends JFrame {
 
-    private GrafCanvas canvas;
+    public static GrafCanvas canvas;
     boolean m_isSimple;
     String m_title;
 
@@ -25,12 +29,12 @@ public class Graf extends JFrame {
         if (isSimple) {
             m_title = "Graf neorientat";
             this.setTitle("Graf neorientat");
-            //canvas = new GrafNeorientatCanvas();
         } else {
             m_title = "Graf neorientat";
             this.setTitle("Graf orientat");
-            //canvas = new GrafOrientatCanvas();
         }
+        canvas = GrafCanvasFactory.initGrafCanvas(isSimple);
+        //canvas.addMouseListener(); //TODO: MOUSE LISTENER FACTORY
         this.add(canvas, BorderLayout.CENTER);
         this.addWindowListener(new WindowListener() {
             @Override

@@ -1,4 +1,4 @@
-package com.sort_app;
+package com.sort_app.graphComponents;
 
 import java.awt.*;
 

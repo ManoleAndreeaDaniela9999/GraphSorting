@@ -1,5 +1,7 @@
 package com.sort_app;
 
+import com.sort_app.factories.GrafFactory;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;

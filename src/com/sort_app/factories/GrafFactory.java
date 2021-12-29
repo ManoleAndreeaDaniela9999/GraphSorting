@@ -1,4 +1,6 @@
-package com.sort_app;
+package com.sort_app.factories;
+
+import com.sort_app.Graf;
 
 public class GrafFactory {
 
@@ -7,7 +9,7 @@ public class GrafFactory {
         try {
             graf = new Graf(isSimple);
         } catch (Exception e) {
-            System.out.println("Main menu initialization failed!");
+            System.out.println("GraphFrame initialization failed!");
             return null;
         }
         return graf;
