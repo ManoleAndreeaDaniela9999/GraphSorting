@@ -16,6 +16,8 @@ public class Graf extends JFrame implements ActionListener {
     private String m_title;
     private MouseAdapter m_mAdapter;
     private JMenuBar m_menuBar;
+    private JMenuItem m_connectedComponentsMenu;
+    private JMenuItem m_topologicalSorting;
 
     public Graf(boolean isSimple) {
 
@@ -80,18 +82,31 @@ public class Graf extends JFrame implements ActionListener {
         });
         m_menuBar = new JMenuBar();
 
-        JMenu connectedComponentsMenu = new JMenu("Preview connected components");
-        JMenu topologicalSorting = new JMenu("Preview topological Sorting");
+        m_connectedComponentsMenu = new JMenuItem("Preview connected components");
+        m_topologicalSorting = new JMenuItem("Preview topological Sorting");
 
-        m_menuBar.add(connectedComponentsMenu);
-        m_menuBar.add(topologicalSorting);
-        
+        m_connectedComponentsMenu.addActionListener(this);
+        m_topologicalSorting.addActionListener(this);
+
+        JMenu options = new JMenu("Options");
+        options.add(m_connectedComponentsMenu);
+        options.add(m_topologicalSorting);
+        m_menuBar.add(options);
+
         this.setJMenuBar(m_menuBar);
         this.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == m_connectedComponentsMenu) {
+            System.out.println("You clicked on connected components preview ");
+        }
+        if (e.getSource() == m_topologicalSorting) {
+            System.out.println("You clicked on topological sorting preview ");
+            JOptionPane.showMessageDialog(null, "You clicked on topological sorting preview ");
+        }
 
     }
 }
