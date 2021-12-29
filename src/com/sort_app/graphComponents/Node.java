@@ -8,11 +8,14 @@ public class Node {
     private int number;
     public static int orderNumber = 0;
 
+    private boolean m_wasVisited;
+
     public Node(Point position  , int diameter, int number )  {
         this.position = position;
         this.diameter = Math.max(diameter,20);
         this.number = number;
         orderNumber++;
+        m_wasVisited = false;
     }
 
     public Point getPosition(){
@@ -34,5 +37,13 @@ public class Node {
     @Override
     public String toString(){
         return " Node : " + Integer.toString(number) + position.toString();
+    }
+
+    public boolean wasVisited() {
+        return m_wasVisited;
+    }
+
+    public void setWasVisited(boolean m_wasVisited) {
+        this.m_wasVisited = m_wasVisited;
     }
 }

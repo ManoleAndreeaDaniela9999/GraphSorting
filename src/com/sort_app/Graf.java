@@ -4,10 +4,12 @@ import com.sort_app.factories.GrafCanvasFactory;
 import com.sort_app.factories.MouseAdapterFactory;
 import com.sort_app.frameComponents.GrafCanvas;
 import com.sort_app.graphComponents.Node;
+import com.sort_app.tools.DFAlgApplications;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 
 public class Graf extends JFrame implements ActionListener {
 
@@ -102,10 +104,12 @@ public class Graf extends JFrame implements ActionListener {
 
         if (e.getSource() == m_connectedComponentsMenu) {
             System.out.println("You clicked on connected components preview ");
+            canvas.getNodeList().clone();
         }
         if (e.getSource() == m_topologicalSorting) {
             System.out.println("You clicked on topological sorting preview ");
-            JOptionPane.showMessageDialog(null, "You clicked on topological sorting preview ");
+            String result = DFAlgApplications.TopSort(canvas.getNodeList(),canvas.getArcList());
+            JOptionPane.showMessageDialog(null, result == "" ? "Empty grid": result);
         }
 
     }
