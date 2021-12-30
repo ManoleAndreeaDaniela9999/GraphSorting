@@ -15,7 +15,7 @@ public class GraphicsDrawMethods {
             System.out.println("Max node number reached! ");
             return false;
         }
-        g.setColor(Color.RED);
+        g.setColor(node.getColor());
         g.setFont(new Font("TimesRoman", Font.BOLD, node.getRadius()));
         g.fillOval(node.getPosition().x - node.getRadius(), node.getPosition().y - node.getRadius(), node.getDiam(), node.getDiam());
         g.setColor(Color.WHITE);

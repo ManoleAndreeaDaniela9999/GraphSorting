@@ -28,13 +28,13 @@ public class OrientedGrafCanvas extends GrafCanvas {
         }
         for (Node node :
                 nodeList) {
-           GraphicsDrawMethods.DrawNode(node, g);
+            GraphicsDrawMethods.DrawNode(node, g);
         }
     }
 
     public void addNode(Node node) {
         nodeList.addElement(node);
-        MatrixUtils.ConstructMatrix(getNodeList(),getArcList(), true);
+        MatrixUtils.ConstructMatrix(getNodeList(), getArcList(), true);
     }
 
     public Vector<Node> getNodeList() {
@@ -42,19 +42,20 @@ public class OrientedGrafCanvas extends GrafCanvas {
     }
 
     @Override
-    public void addArc(Arc arc) {  for(Arc aux : arcList )
-    {
-        if(aux.getStartNode().getPosition().equals( arc.getStartNode().getPosition()) &&
-                aux.getEndNode().getPosition().equals(arc.getEndNode().getPosition()) && aux != arc )
-        {
-            System.out.println("Arc from" + arc.getStartNode() + "to" + arc.getEndNode() + "already exits !");
-            return;
+    public void addArc(Arc arc) {
+        for (Arc aux : arcList) {
+            if (aux.getStartNode().getPosition().equals(arc.getStartNode().getPosition()) &&
+                    aux.getEndNode().getPosition().equals(arc.getEndNode().getPosition()) && aux != arc) {
+                System.out.println("Arc from" + arc.getStartNode() + "to" + arc.getEndNode() + "already exits !");
+                return;
+            }
         }
-    }
         arcList.addElement(arc);
-        MatrixUtils.ConstructMatrix(getNodeList(),getArcList(), true);
+        MatrixUtils.ConstructMatrix(getNodeList(), getArcList(), true);
     }
 
     @Override
-    public Vector<Arc> getArcList() {return arcList; }
+    public Vector<Arc> getArcList() {
+        return arcList;
+    }
 }

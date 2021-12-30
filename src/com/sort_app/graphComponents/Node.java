@@ -7,35 +7,45 @@ public class Node {
     private int diameter;
     private int number;
     public static int orderNumber = 0;
+    private Color m_color;
+    boolean isConnected;
 
     private boolean m_wasVisited;
 
-    public Node(Point position  , int diameter, int number )  {
+    public Node(Point position, int diameter, int number) {
         this.position = position;
-        this.diameter = Math.max(diameter,20);
+        this.diameter = Math.max(diameter, 20);
         this.number = number;
         orderNumber++;
         m_wasVisited = false;
+        m_color = Color.red;
+        isConnected = false;
     }
 
-    public Point getPosition(){
-        return new Point( position.x, position.y);
+    public Point getPosition() {
+        return new Point(position.x, position.y);
     }
 
     public void setPosition(Point position) {
         this.position = position;
     }
 
-    public int getDiam(){
+    public int getDiam() {
         return diameter;
     }
-    public int getRadius(){
+
+    public int getRadius() {
         return diameter / 2;
-    };
-    public int getNumber() {return number;}
+    }
+
+    ;
+
+    public int getNumber() {
+        return number;
+    }
 
     @Override
-    public String toString(){
+    public String toString() {
         return " Node : " + Integer.toString(number) + position.toString();
     }
 
@@ -46,4 +56,22 @@ public class Node {
     public void setWasVisited(boolean m_wasVisited) {
         this.m_wasVisited = m_wasVisited;
     }
+
+    public Color getColor() {
+        return m_color;
+    }
+
+    public void setColor(Color m_color) {
+        this.m_color = m_color;
+    }
+
+    public void markAsConnected() {
+        isConnected = true;
+    }
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+
 }

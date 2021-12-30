@@ -9,6 +9,7 @@ import com.sort_app.tools.DFAlgApplications;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 import java.util.Vector;
 
 public class Graf extends JFrame implements ActionListener {
@@ -92,7 +93,8 @@ public class Graf extends JFrame implements ActionListener {
 
         JMenu options = new JMenu("Options");
         options.add(m_connectedComponentsMenu);
-        options.add(m_topologicalSorting);
+        if (!isSimple)
+            options.add(m_topologicalSorting);
         m_menuBar.add(options);
 
         this.setJMenuBar(m_menuBar);
@@ -104,12 +106,13 @@ public class Graf extends JFrame implements ActionListener {
 
         if (e.getSource() == m_connectedComponentsMenu) {
             System.out.println("You clicked on connected components preview ");
-            canvas.getNodeList().clone();
+            DFAlgApplications.PaintConnectedComponents(canvas.getNodeList(), canvas.getArcList());
+            canvas.repaint();
         }
         if (e.getSource() == m_topologicalSorting) {
             System.out.println("You clicked on topological sorting preview ");
-            String result = DFAlgApplications.TopSort(canvas.getNodeList(),canvas.getArcList());
-            JOptionPane.showMessageDialog(null, result == "" ? "Empty grid": result);
+            String result = DFAlgApplications.TopSort(canvas.getNodeList(), canvas.getArcList());
+            JOptionPane.showMessageDialog(null, result == "" ? "Empty grid" : result);
         }
 
     }
