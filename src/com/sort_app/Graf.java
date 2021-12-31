@@ -19,7 +19,8 @@ public class Graf extends JFrame implements ActionListener {
     private String m_title;
     private MouseAdapter m_mAdapter;
     private JMenuBar m_menuBar;
-    private JMenuItem m_connectedComponentsMenu;
+    private JMenuItem m_connectedComponents;
+    private JMenuItem m_stronglyConnectedComponents;
     private JMenuItem m_topologicalSorting;
 
     public Graf(boolean isSimple) {
@@ -85,16 +86,21 @@ public class Graf extends JFrame implements ActionListener {
         });
         m_menuBar = new JMenuBar();
 
-        m_connectedComponentsMenu = new JMenuItem("Preview connected components");
+        m_connectedComponents = new JMenuItem("Preview connected components");
+        m_stronglyConnectedComponents = new JMenuItem("Preview strongly connected components");
         m_topologicalSorting = new JMenuItem("Preview topological Sorting");
 
-        m_connectedComponentsMenu.addActionListener(this);
+        m_connectedComponents.addActionListener(this);
+        m_stronglyConnectedComponents.addActionListener(this);
         m_topologicalSorting.addActionListener(this);
 
         JMenu options = new JMenu("Options");
-        options.add(m_connectedComponentsMenu);
-        if (!isSimple)
+        options.add(m_connectedComponents);
+        if (!isSimple) {
+            options.add(m_stronglyConnectedComponents);
             options.add(m_topologicalSorting);
+
+        }
         m_menuBar.add(options);
 
         this.setJMenuBar(m_menuBar);
@@ -104,9 +110,14 @@ public class Graf extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == m_connectedComponentsMenu) {
+        if (e.getSource() == m_connectedComponents) {
             System.out.println("You clicked on connected components preview ");
             DFAlgApplications.PaintConnectedComponents(canvas.getNodeList(), canvas.getArcList());
+            canvas.repaint();
+        }
+        if (e.getSource() == m_stronglyConnectedComponents) {
+            System.out.println("You clicked on strongly connected components preview ");
+            DFAlgApplications.PaintStronglyConnectedComponents(canvas.getNodeList(), canvas.getArcList());
             canvas.repaint();
         }
         if (e.getSource() == m_topologicalSorting) {

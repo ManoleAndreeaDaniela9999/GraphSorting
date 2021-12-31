@@ -9,6 +9,8 @@ import java.util.Random;
 import java.util.Stack;
 import java.util.Vector;
 
+import static java.lang.Math.min;
+
 public class DFAlgApplications {
 
     enum SelectedOption {
@@ -59,6 +61,64 @@ public class DFAlgApplications {
             }
         }
         resetVisited(nodeList);
+    }
+
+    public static void PaintStronglyConnectedComponents(Vector<Node> nodeList, Vector<Arc> arcList) {
+        //This is Tarjan's alg
+        //because given the data it is more suited than other variants of solving this problem
+
+        if (nodeList.isEmpty()) return;
+        Stack<Node> stack = new Stack<>();
+        boolean[] onStack = new boolean[nodeList.size()];
+        int[] lowLinks = new int[nodeList.size()];
+        Color randColor ;
+        int[] sccCount = new int[1];
+        sccCount[0] = 0;
+        for (Node currentNode : nodeList) {
+            if (!currentNode.wasVisited())
+                dfSCCVariant(currentNode, arcList, stack, onStack, lowLinks, sccCount);
+        }
+
+        while(sccCount[0] > 0){
+            randColor = RandomColor();
+            for (Node currentNode : nodeList) {
+            if(lowLinks[currentNode.getNumber()] == sccCount[0])
+                currentNode.setColor(randColor);
+            }
+            sccCount[0]-=1;
+        }
+
+        resetVisited(nodeList);
+    }
+
+    private static void dfSCCVariant(Node currentNode, Vector<Arc> arcList, Stack<Node> stack, boolean[] onStack, int[] lowLinks, int[] sccCount) {
+
+        stack.push(currentNode);
+        onStack[currentNode.getNumber()] = true;
+        lowLinks[currentNode.getNumber()] = currentNode.getNumber();
+        currentNode.setWasVisited(true);
+
+        Vector<Node> neighbours = new Vector<>();
+        neighbours = childrenOf(currentNode, arcList);
+
+        for (Node neighbour:
+             neighbours) {
+            if(!neighbour.wasVisited())
+                dfSCCVariant(neighbour,arcList,stack,onStack,lowLinks,sccCount);
+            if(onStack[neighbour.getNumber()])
+                lowLinks[currentNode.getNumber()] = min(lowLinks[currentNode.getNumber()],lowLinks[neighbour.getNumber()]);
+        }
+
+        if(currentNode.getNumber() != lowLinks[currentNode.getNumber()]) return;
+
+        while(!stack.empty()){
+
+            Node node = stack.pop();
+            onStack[node.getNumber()] = false;
+            if(node.getNumber() == currentNode.getNumber()) break;
+            sccCount[0]+=1;
+        }
+
     }
 
     private static Color RandomColor() {
